@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
+import kodlamaio.hrms.core.utilities.results.Result;
+import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.JobDao;
 import kodlamaio.hrms.entities.concretes.Job;
 
@@ -22,9 +27,21 @@ public class JobManager implements JobService{
 
 
 	@Override
-	public List<Job> getAll() {
+	public DataResult<List<Job>> getAll() {
 		// TODO Auto-generated method stub
-		return this.jobDao.findAll();
+		return new SuccessDataResult<List<Job>>(
+				this.jobDao.findAll(),
+				"Job getirildi");
+	}
+
+
+	@Override
+	public Result add(Job job) {
+		if (!jobDao.findByName(job.getName()).isEmpty()) {
+			return new ErrorResult("Bu iş pozisyonu zaten eklenmiş");
+		}
+		this.jobDao.save(job);
+		return new SuccessResult("Job Added");
 	}
 	
 
