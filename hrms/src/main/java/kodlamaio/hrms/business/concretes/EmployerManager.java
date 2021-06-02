@@ -78,6 +78,7 @@ public class EmployerManager implements EmployerService {
 		return new SuccessResult("Employer Added.");
 	}
 
+
 	private boolean isEmailandWebsiteDomainSame(Employer employer) {
 		String email = employer.getEmail();
 		String[] emailSplit = email.split("@");

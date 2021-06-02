@@ -59,16 +59,20 @@ public class JobSeekerManager implements JobSeekerService {
 		if (mernisService.isMernisConfirmed()) {
 			return new ErrorResult("Mernis Doğrulma Başarısız"); // Mernis Simule Edildi
 		}
-		if (!userDao.findByEmail(jobSeeker.getEmail()).isEmpty()) {
+		if (!userDao.findByEmail(jobSeeker.getEmail()).isEmpty()) { //Email kontrolü
 			return new ErrorResult("Email zaten kayıtlı.");
 		}
 		if (!jobSeekerDao.findByNationalId(jobSeeker.getNationalId()).isEmpty()) {
 			return new ErrorResult("National id zaten mevcut.");
 		}
 		if (emailValidationService.isEmailConfirmed()) {
+			jobSeeker.setVerify(false);
 			return new ErrorResult("Email Doğrulma Başarısız"); // Email doğrulama Simule edildi
 		}
-
+		
+		
+		
+		jobSeeker.setVerify(true);
 		this.jobSeekerDao.save(jobSeeker);
 		return new SuccessResult("Email Doğrulama Başarılı, Data Eklendi");
 	}

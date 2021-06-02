@@ -15,25 +15,21 @@ import kodlamaio.hrms.dataAccess.JobDao;
 import kodlamaio.hrms.entities.concretes.Job;
 
 @Service
-public class JobManager implements JobService{
+public class JobManager implements JobService {
 
 	private JobDao jobDao;
-	
+
 	@Autowired
 	public JobManager(JobDao jobDao) {
 		super();
 		this.jobDao = jobDao;
 	}
 
-
 	@Override
 	public DataResult<List<Job>> getAll() {
 		// TODO Auto-generated method stub
-		return new SuccessDataResult<List<Job>>(
-				this.jobDao.findAll(),
-				"Job getirildi");
+		return new SuccessDataResult<List<Job>>(this.jobDao.findAll(), "Job getirildi");
 	}
-
 
 	@Override
 	public Result add(Job job) {
@@ -43,9 +39,5 @@ public class JobManager implements JobService{
 		this.jobDao.save(job);
 		return new SuccessResult("Job Added");
 	}
-	
 
-	
-	
-	
 }
