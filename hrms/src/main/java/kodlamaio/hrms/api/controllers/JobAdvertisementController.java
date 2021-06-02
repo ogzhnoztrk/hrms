@@ -1,5 +1,6 @@
 package kodlamaio.hrms.api.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,18 @@ public class JobAdvertisementController {
 	DataResult<List<JobAdvertisement>> getAll(){
 		return this.advertisementService.getAll();
 		
+	}
+	@GetMapping("/getActiveJobAdvertisements")
+	public DataResult<List<JobAdvertisement>> findByIsActive(boolean isActive){
+		return this.advertisementService.findByIsActive(true);
+	}
+	@GetMapping("/getActiveJobAdvertisementsOrderedByDate")
+	public DataResult<List<JobAdvertisement>> findByIsActiveAndApplicationDeadline(boolean isActive, Date deadLine){
+		return this.advertisementService.findByIsActiveAndApplicationDeadline(true, deadLine);
+	}
+	@GetMapping("/getActiveJobAdvertisementsWithCompanyName")
+	public DataResult<List<JobAdvertisement>>findByIsActiveAndEmployer_CompanyName(boolean status, String companyName){
+		return this.advertisementService.findByIsActiveAndEmployer_CompanyName(true, companyName);
 	}
 	
 	

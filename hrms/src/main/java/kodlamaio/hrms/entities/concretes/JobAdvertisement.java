@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +25,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "job_ads")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "jobAdvertisements" })
+
 public class JobAdvertisement {
 
 	@Id
@@ -46,7 +48,7 @@ public class JobAdvertisement {
 	private City city;
 
 	@Column(name = "application_deadline")
-	private Date applicationDadline;
+	private Date applicationDeadline;
 
 	@Column(name = "number_of_open_positions")
 	private int numberOfOpenPositions;

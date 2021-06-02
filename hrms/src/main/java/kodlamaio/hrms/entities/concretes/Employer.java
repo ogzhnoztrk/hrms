@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "employers")
 @PrimaryKeyJoinColumn(name = "employer_id")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "products" })
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "jobAdvertisements" })
 
 public class Employer extends User {
 

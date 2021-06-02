@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +48,21 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		return new SuccessResult("İlan Silindi.");
 	}
 
+	@Override
+	public DataResult<List<JobAdvertisement>> findByIsActive(boolean isActive) {
+		return new SuccessDataResult<List<JobAdvertisement>>
+		(this.jobAdvertisementDao.findByIsActive(isActive),"Veriler getirildi.");
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> findByIsActiveAndApplicationDeadline(boolean isActive, Date deadLine) {
+		return new SuccessDataResult<List<JobAdvertisement>>
+		(this.jobAdvertisementDao.findByIsActiveAndApplicationDeadline(isActive, deadLine));
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> findByIsActiveAndEmployer_CompanyName(boolean isActive,String companyName) {
+		return new SuccessDataResult<List<JobAdvertisement>>
+		(this.jobAdvertisementDao.findByIsActiveAndEmployer_CompanyName(isActive, companyName));
+	}
 }
