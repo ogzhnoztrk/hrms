@@ -69,11 +69,11 @@ public class EmployerManager implements EmployerService {
 			return new ErrorResult("Hrms Doğrulma Başarısız"); // Hrms doğrulama Simule edildi
 		}
 		if (emailValidationService.isEmailConfirmed()) {
-			employer.setEmailVerify(false);
+			employer.setVerify(false);
 			return new ErrorResult("Email Doğrulma Başarısız"); // Email doğrulama Simule edildi
 		}
 		
-		employer.setEmailVerify(true);
+		employer.setVerify(true);
 		this.employerDao.save(employer);
 		return new SuccessResult("Employer Added.");
 	}

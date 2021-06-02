@@ -4,9 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -41,7 +39,7 @@ public class JobSeeker extends User {
 	@Column(name = "birth_date")
 	private Date birthDate;
 
-	@Column(name = "verify")
+	@Column(name = "is_verify")
 	private boolean verify;
 
 	public JobSeeker(String email, String password, String firstName, String lastName, String nationalId,
@@ -53,7 +51,5 @@ public class JobSeeker extends User {
 		this.birthDate = birthDate;
 		this.verify = verify;
 	}
-
-
 
 }
