@@ -15,11 +15,10 @@ import kodlamaio.hrms.dataAccess.JobAdvertisementDao;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
 
 @Service
-public class JobAdvertisementManager implements JobAdvertisementService{
+public class JobAdvertisementManager implements JobAdvertisementService {
 
 	private JobAdvertisementDao jobAdvertisementDao;
-	
-	
+
 	@Autowired
 	public JobAdvertisementManager(JobAdvertisementDao jobAdvertisementDao) {
 		super();
@@ -32,14 +31,10 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		return new SuccessResult("İlan Ekleme Başarılı.");
 	}
 
-	
-
 	@Override
 	public DataResult<List<JobAdvertisement>> getAll() {
-		
-		return new SuccessDataResult<List<JobAdvertisement>>(
-				this.jobAdvertisementDao.findAll(),
-				"İlanlar Listelendi");
+
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(), "İlanlar Listelendi");
 	}
 
 	@Override
@@ -50,19 +45,31 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 
 	@Override
 	public DataResult<List<JobAdvertisement>> findByIsActive(boolean isActive) {
-		return new SuccessDataResult<List<JobAdvertisement>>
-		(this.jobAdvertisementDao.findByIsActive(isActive),"Veriler getirildi.");
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByIsActive(isActive),
+				"Veriler getirildi.");
 	}
 
 	@Override
 	public DataResult<List<JobAdvertisement>> findByIsActiveAndApplicationDeadline(boolean isActive, Date deadLine) {
-		return new SuccessDataResult<List<JobAdvertisement>>
-		(this.jobAdvertisementDao.findByIsActiveAndApplicationDeadline(isActive, deadLine));
+		return new SuccessDataResult<List<JobAdvertisement>>(
+				this.jobAdvertisementDao.findByIsActiveAndApplicationDeadline(isActive, deadLine));
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisement>> findByIsActiveAndEmployer_CompanyName(boolean isActive,String companyName) {
-		return new SuccessDataResult<List<JobAdvertisement>>
-		(this.jobAdvertisementDao.findByIsActiveAndEmployer_CompanyName(isActive, companyName));
+	public DataResult<List<JobAdvertisement>> findByIsActiveAndEmployer_CompanyName(boolean isActive,
+			String companyName) {
+		return new SuccessDataResult<List<JobAdvertisement>>(
+				this.jobAdvertisementDao.findByIsActiveAndEmployer_CompanyName(isActive, companyName));
 	}
+
+	@Override
+	public Result setValue(int id, boolean value) {
+		JobAdvertisement job = this.jobAdvertisementDao.findByAdvertisementIdAndIsActiveTrue(id);
+        job.setActive(value);
+        this.jobAdvertisementDao.save(job);
+        return new SuccessResult("Aktiflik durumu başarıyla değiştirildi.");
+	}
+
+	
+
 }
