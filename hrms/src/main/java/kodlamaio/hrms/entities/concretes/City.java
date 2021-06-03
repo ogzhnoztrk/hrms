@@ -30,6 +30,7 @@ public class City {
 	@Column(name = "city_id")
 	private int cityId;
 
+	 
 	@Column(name = "name")
 	private String name;
 

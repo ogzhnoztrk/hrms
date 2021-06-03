@@ -35,6 +35,7 @@ public class JobAdvertisement {
 	private int advertisementId;
 
 	
+	
 	@ManyToOne()
 	@JoinColumn(name = "job_position_id")
 	private JobPosition jobPosition;
