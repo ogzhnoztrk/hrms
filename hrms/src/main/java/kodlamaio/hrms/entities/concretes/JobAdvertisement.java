@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,8 +34,6 @@ public class JobAdvertisement {
 	@Column(name = "advertisement_id")
 	private int advertisementId;
 
-	
-	
 	@ManyToOne()
 	@JoinColumn(name = "job_position_id")
 	private JobPosition jobPosition;
